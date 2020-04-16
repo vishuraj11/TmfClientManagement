@@ -1,0 +1,50 @@
+<div class="container">
+    <!-- heading and searchbox -->
+    <div class="row" style="top: 20px;">
+        <div class="col-md-3"> 
+            <h4>Clients </h4>
+            <p>Total-{{numberOfClients}} clients</p>
+        </div>
+        <div class="col-md-5"></div>
+        <div class="col-md-4"> 
+              <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
+                  aria-label="Search"  [(ngModel)]="searchText" name="seraches">
+
+              </form>
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-borderless" matSort> 
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Client Nam</th>
+                    <th scope="col">Company Name</th>
+                    <th scope="col">No. of Entities</th>
+                    <th scope="col">Active Users</th>
+                    <th scope="col">Countries</th>
+                    <th><i class="fa fa-ellipsis-v" aria-hidden="true"></i></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor='let client of clients | filterParent: searchText : "clientName" | paginate: config'> 
+                    <th scope="row">1</th>
+                    <td>{{client.clientName}}</td>
+                    <td>{{client.companyName}}</td>
+                    <td>{{client.noOfEntities}}</td>
+                    <td>{{client.activeUser}}</td>
+                    <td>{{client.countries}}</td>
+                    <td><i class="fa fa-ellipsis-v" aria-hidden="true"></i></td>
+                </tr>
+                </tbody>
+            </table>
+          <mat-paginator  [pageSize]="5" [length]="numberOfClients" (pageChange)="pageChanged($event)" ></mat-paginator>
+          <!--pagination-controls (pageChange)="pageChanged($event)"></pagination-controls-->
+        </div> 
+    </div>
+
+</div>
